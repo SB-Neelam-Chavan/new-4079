@@ -189,6 +189,79 @@ paths:
           description: Demande d'enregsitrement d'une souscription d'un produit DAT
       x-stoplight:
         id: vjs74avukbyqy
+  '/adherents/{UOM_code}/contracts/{contract_id}/DAT_subscriptions/{DAT_subscription_id}/level_rates':
+    get:
+      summary: Liste des taux paliers d'une souscription
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              UOM_code:
+                type: string
+                description: Code adhérent (selon nomenclature CAM0303)
+              contract_id:
+                type: string
+                description: Identifiant contrat
+              DAT_subscription_id:
+                type: string
+                description: Identifiant de la souscription de DAT
+              DAT_level_rates:
+                $ref: '#/definitions/DATLevelRate'
+              errors:
+                type: array
+                items:
+                  $ref: '#/definitions/Error'
+        '403':
+          description: Forbidden
+          schema:
+            type: object
+            properties:
+              errors:
+                type: array
+                items:
+                  $ref: '#/definitions/Error'
+        '404':
+          description: Not Found
+          schema:
+            type: object
+            properties:
+              errors:
+                type: array
+                items:
+                  $ref: '#/definitions/Error'
+        '500':
+          description: Internal server error
+          schema:
+            type: object
+            properties:
+              errors:
+                type: array
+                items:
+                  $ref: '#/definitions/Error'
+      operationId: get-adherents-UOM_code-contracts-contract_id-DAT_subscriptions-level_rates
+      description: "Renvoie la liste des taux paliers d'une souscription\r\n\r\n"
+      parameters: []
+      security: []
+      x-stoplight:
+        id: ftd6moml5fuwd
+    parameters:
+      - type: string
+        name: UOM_code
+        in: path
+        required: true
+        description: Code adhérent (selon nomenclature CAM0303)
+      - type: string
+        name: DAT_subscription_id
+        in: path
+        required: true
+        description: Identifiant de la souscription de DAT
+      - type: string
+        name: contract_id
+        in: path
+        required: true
+        description: Identifiant contrat
   '/adherents/{UOM_code}/contracts/{contract_id}/DAT_subscriptions/{DAT_subscription_id}':
     parameters:
       - type: string
@@ -265,79 +338,6 @@ paths:
           description: 'Détail des objets restitués : "product" permet de restituer les caractéristiques de souscription d''un DAT, la vue d''ensemble du DAT souscrit, les caractéristiques du produit DAT ; "details" permet de restituer les caractéristiques de souscription d''un DAT, la vue d''ensemble du DAT souscrit et les données relatives à l''historique de souscription du DAT ; "full" permet de restituer les caractéristiques de souscription d''un DAT, la vue d''ensemble du DAT souscrit, les caractéristiques du produit DAT et les données relatives à l''historique de souscription du DAT ; Si absents, seules les caractéristiques de souscription d''un DAT, la vue d''ensemble du DAT souscrit sont restituées'
       x-stoplight:
         id: 5jo51akgveybg
-  '/adherents/{UOM_code}/contracts/{contract_id}/DAT_subscriptions/{DAT_subscription_id}/level_rates':
-    get:
-      summary: Liste des taux paliers d'une souscription
-      responses:
-        '200':
-          description: OK
-          schema:
-            type: object
-            properties:
-              UOM_code:
-                type: string
-                description: Code adhérent (selon nomenclature CAM0303)
-              contract_id:
-                type: string
-                description: Identifiant contrat
-              DAT_subscription_id:
-                type: string
-                description: Identifiant de la souscription de DAT
-              DAT_level_rates:
-                $ref: '#/definitions/DATLevelRate'
-              errors:
-                type: array
-                items:
-                  $ref: '#/definitions/Error'
-        '403':
-          description: Forbidden
-          schema:
-            type: object
-            properties:
-              errors:
-                type: array
-                items:
-                  $ref: '#/definitions/Error'
-        '404':
-          description: Not Found
-          schema:
-            type: object
-            properties:
-              errors:
-                type: array
-                items:
-                  $ref: '#/definitions/Error'
-        '500':
-          description: Internal server error
-          schema:
-            type: object
-            properties:
-              errors:
-                type: array
-                items:
-                  $ref: '#/definitions/Error'
-      operationId: get-adherents-UOM_code-contracts-contract_id-DAT_subscriptions-level_rates
-      description: "Renvoie la liste des taux paliers d'une souscription\r\n\r\n"
-      parameters: []
-      security: []
-      x-stoplight:
-        id: ftd6moml5fuwd
-    parameters:
-      - type: string
-        name: UOM_code
-        in: path
-        required: true
-        description: Code adhérent (selon nomenclature CAM0303)
-      - type: string
-        name: DAT_subscription_id
-        in: path
-        required: true
-        description: Identifiant de la souscription de DAT
-      - type: string
-        name: contract_id
-        in: path
-        required: true
-        description: Identifiant contrat
   '/adherents/{UOM_code}/contracts/{contract_id}/DAT_subscriptions/{DAT_subscription_id}/reviewing_data':
     get:
       summary: Consultation des bases de révision d'un produit pour une souscription
